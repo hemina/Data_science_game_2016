@@ -30,12 +30,15 @@ print(count)
 ordered=sorted(dic.items())
 img_data = pd.DataFrame(ordered)
 img_data.columns = ['Id', 'data']
+img_data['Id']=img_data['Id'].astype(str)
 print(img_data)
 #img_data.to_csv("img_data.csv", sep=';', index=False)
 
 label=pd.read_csv("/home/mina/data_science_game/id_train.csv")
+label['Id']=label['Id'].astype(str)
 print(label)
-
+#print(type(label.loc[['1'],['Id']]))
+#print(type(img_data[['1'],['Id']]))
 train=pd.merge(label, img_data, on='Id', how='inner')
 print(train)
 
