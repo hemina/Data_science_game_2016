@@ -36,6 +36,6 @@ print(img_data)
 label=pd.read_csv("/home/mina/data_science_game/id_train.csv")
 print(label)
 
-train=pd.merge(label, img_data, on="Id")
+train=pd.merge(label, img_data, on='Id', how='inner')
 print(train)
 
