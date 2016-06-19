@@ -30,15 +30,18 @@ print(count)
 ordered=sorted(dic.items())
 img_data = pd.DataFrame(ordered)
 img_data.columns = ['Id', 'data']
+# Convert the Id type into string to ensure that it will match the Id of label
 img_data['Id']=img_data['Id'].astype(str)
 print(img_data)
-#img_data.to_csv("img_data.csv", sep=';', index=False)
 
 label=pd.read_csv("/home/mina/data_science_game/id_train.csv")
+# Convert the Id type into string to ensure that it will match the Id of img_data
 label['Id']=label['Id'].astype(str)
 print(label)
-#print(type(label.loc[['1'],['Id']]))
-#print(type(img_data[['1'],['Id']]))
-train=pd.merge(label, img_data, on='Id', how='inner')
+
+# By merging the two datasets, we obtain the train set. There are 8000 observations with the label of roof type. Since we have 42759 images, but only 8000 labels. It's possible to try semi-supervised learning with the unlabeled images.
+
+train=pd.merge(img_data, label, on='Id', how='inner')
 print(train)
 
+#train.to_csv("train.csv", sep=',', index=False)
