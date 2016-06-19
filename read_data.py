@@ -27,8 +27,15 @@ for root, dirnames, filenames in os.walk( rootdir0 ):
 	if count%5000==0:
 		print(len(dic))
 print(count)
-ordered=sorted(dic)
+ordered=sorted(dic.items())
 img_data = pd.DataFrame(ordered)
-img_data.to_csv("img_data.csv", sep=';', index=False)
+img_data.columns = ['Id', 'data']
+print(img_data)
+#img_data.to_csv("img_data.csv", sep=';', index=False)
 
+label=pd.read_csv("/home/mina/data_science_game/id_train.csv")
+print(label)
+
+train=pd.merge(label, img_data, on="Id")
+print(train)
 
